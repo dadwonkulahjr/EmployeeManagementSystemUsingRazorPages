@@ -1,0 +1,33 @@
+﻿@page "/employees/details/{id:int?}"
+@model SimpleManagementSystem.Pages.Employees.DetailsModel
+@{
+    ViewData["Title"] = "Employee Details";
+    string phonePath = "~/images/" + (Model.Employee.PhotoPath ?? "jjc.jpg");
+
+}
+<style>
+    .btn {
+        width: 75px;
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card mt-2">
+            <div class="card-header text-center text-primary">
+                <h4>@Model.Employee.Name</h4>
+            </div>
+            <img src="@phonePath" class="rounded-circle card-img-top" asp-append-version="true" />
+            <div class="card-body text-center">
+                <h4>Id: @Model.Employee.Id.ToString()</h4>
+                <h4>Email: @Model.Employee.Email</h4>
+                <h4>Department: @Model.Employee.Department</h4>
+            </div>
+            <div class="card-footer text-center">
+                <a class="btn btn-outline-secondary sm mt-2" asp-page="/Employees/Index">Back</a>
+                <a class="btn btn-outline-info  mt-2" asp-route-Id="@Model.Employee.Id" asp-page="/Employees/Edit">Edit</a>
+                <a class="btn btn-outline-danger  mt-2">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
