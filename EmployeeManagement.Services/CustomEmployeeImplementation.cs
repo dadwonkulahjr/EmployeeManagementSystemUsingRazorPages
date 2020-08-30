@@ -21,6 +21,23 @@ namespace EmployeeManagement.Services
            };
         }
 
+        public Employee AddEmployee(Employee newEmployee)
+        {
+            newEmployee.Id = _employeeList.Max(emp => emp.Id) + 1;
+            _employeeList.Add(newEmployee);
+            return newEmployee;
+        }
+
+        public Employee Delete(int id)
+        {
+           Employee employee = _employeeList.FirstOrDefault(emp => emp.Id == id);
+            if(employee != null)
+            {
+                _employeeList.Remove(employee);
+            }
+            return employee;
+        }
+
         public Employee GetEmployeeById(int id)
         {
             Employee employee = _employeeList.FirstOrDefault(emp => emp.Id == id);

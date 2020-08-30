@@ -6,9 +6,11 @@ using EmployeeManagement.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SimpleManagementSystem.Pages.Employees;
 
 namespace SimpleManagementSystem
 {
@@ -26,6 +28,13 @@ namespace SimpleManagementSystem
         {
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddSingleton<IEmployeeRepository, CustomEmployeeImplementation>();
+            services.Configure<RouteOptions>((options) =>
+            {
+                options.AppendTrailingSlash = true;
+                options.LowercaseQueryStrings = false;
+                options.LowercaseUrls = true;
+                options.ConstraintMap.Add("even", typeof(CustomConstraint));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

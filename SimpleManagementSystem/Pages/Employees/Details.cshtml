@@ -1,4 +1,4 @@
-﻿@page "/employees/details/{id:int?}"
+﻿@page "/employees/details/view/{id:int:min(1)}"
 @model SimpleManagementSystem.Pages.Employees.DetailsModel
 @{
     ViewData["Title"] = "Employee Details";
@@ -13,6 +13,23 @@
 
 <div class="row justify-content-center">
     <div class="col-md-6">
+        @if (!string.IsNullOrEmpty(Model.Message))
+        {
+            if (Model.Message == "Thank you for turning on notification")
+            {
+                <div class="alert alert-primary alert-dismissible m-2">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Success!</strong> @Model.Message
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger alert-dismissible m-2">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Failed</strong> @Model.Message
+                </div>
+            }
+        }
         <div class="card mt-2">
             <div class="card-header text-center text-primary">
                 <h4>@Model.Employee.Name</h4>

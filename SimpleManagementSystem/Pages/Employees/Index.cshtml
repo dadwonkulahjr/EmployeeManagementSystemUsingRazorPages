@@ -41,7 +41,7 @@
                 <td>
                     <a class="btn btn-outline-secondary mt-2" asp-route-id="@employee.Id" asp-page="/Employees/Details">Details</a>
                     <a asp-route-id="@employee.Id" class="btn btn-outline-primary mt-2" asp-page="/Employees/Edit">Edit</a>
-                    <a class="btn btn-danger mt-2 text-white">Delete</a>
+                    <a class="btn btn-danger mt-2 text-white" asp-route-id="@employee.Id" asp-page="/Employees/Delete">Delete</a>
                 </td>
             </tr>
         }

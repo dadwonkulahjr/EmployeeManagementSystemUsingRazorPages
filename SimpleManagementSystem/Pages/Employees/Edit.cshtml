@@ -1,39 +1,66 @@
-﻿@page "/employees/edit/{id}"
+﻿@page "{id:min(1)?}/{handler?}"
 @model SimpleManagementSystem.Pages.Employees.EditModel
 @{
     ViewData["Title"] = "Edit Existing Employee";
     string phonePath = "~/images/" + (Model.Employee.PhotoPath ?? "jjc.jpg");
+    var customPageHeader = Model.Employee.Id > 0 ? "Edit Existing Employee" : "Create";
 }
-<h1>Edit Existing Employee</h1>
 
-<form method="post">
+<h1>
+    Notification Preferences
+</h1>
+<form method="post" asp-page-handler="UpdateNotificationPreferences">
+    <div class="form-check">
+        <input asp-for="Notify" class="form-check-input" />
+        <label class="form-check-label" asp-for="Notify">
+            Received email notification when my details changed
+        </label>
+    </div>
+    <button class="btn btn-outline-success" type="submit">
+        Update Notification Preferences
+    </button>
+</form>
+<hr />
+
+<h1>@customPageHeader</h1>
+
+<form method="post" enctype="multipart/form-data" asp-page-handler="OnPost">
     <input hidden="hidden" asp-for="@Model.Employee.Id" />
     <input hidden="hidden" asp-for="@Model.Employee.PhotoPath" />
+    @if (!ModelState.IsValid)
+    {
+    <div class="alert alert-danger alert-dismissible" asp-validation-summary="All">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    }
     <div class="row form-group">
         <label class="col-form-label col-md-2" asp-for="@Model.Employee.Name"></label>
         <div class="col-sm-12">
-            <input type="text" asp-for="@Model.Employee.Name" class="form-control" />
+            <input type="text" asp-for="@Model.Employee.Name" class="form-control" placeholder="Name..." />
+            <span asp-validation-for="Employee.Name" class="text-danger"></span>
         </div>
     </div>
     <div class="row form-group">
         <label class="col-form-label col-md-2" asp-for="@Model.Employee.Email"></label>
         <div class="col-sm-12">
-            <input type="text" asp-for="@Model.Employee.Email" class="form-control" />
+            <input type="text" asp-for="@Model.Employee.Email" class="form-control" placeholder="Email..." />
+            <span asp-validation-for="Employee.Email" class="text-danger"></span>
         </div>
     </div>
     <div class="row form-group">
         <label class="col-form-label col-md-2" asp-for="@Model.Employee.Department"></label>
         <div class="col-sm-12">
             <select asp-for="@Model.Employee.Department" asp-items="Html.GetEnumSelectList<EmployeeManagement.Models.Department>()" class="form-control">
-                <option></option>
+                <option value="">Select your department</option>
             </select>
+            <span asp-validation-for="Employee.Department" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.CustomPhoto" class="col-form-label col-md-2"></label>
+        <label asp-for="Photo" class="col-form-label col-md-2"></label>
         <div class="col-sm-12">
             <div class="custom-file">
-                <input asp-for="@Model.CustomPhoto" class="form-control custom-file-input" multiple />
+                <input asp-for="Photo" class="form-control custom-file-input" multiple />
                 <label class="custom-file-label">Click here to change photo...</label>
             </div>
         </div>
@@ -42,11 +69,10 @@
     <div class="row justify-content-center"><img src="@phonePath" class="imageThumnails rounded-circle" asp-append-version="true" /></div>
     <div class="row form-group mt-3 ml-1">
         <div class="col-sm-12">
-            <button class="btn btn-outline-success">Update</button>
+            <button class="btn btn-outline-success">Save</button>
             <a asp-page="/Employees/Index" class="btn btn-outline-secondary">Back</a>
         </div>
     </div>
-    <div asp-validation-summary="All" class="text-danger"></div>
     @section Scripts{
         <script>
             $(document).ready(function () {
@@ -62,6 +88,7 @@
                 });
             });
         </script>
+    <partial name="_ValidationScriptsPartial" />
 
     }
 </form>

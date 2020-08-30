@@ -1,0 +1,14 @@
+﻿@page 
+@model SimpleManagementSystem.Pages.ErrorHandler.PageNotFoundModel
+@{
+    ViewData["Title"] = "Not found";
+}
+
+<div class="alert alert-danger">
+<h1>
+   The resource you are looking cannot be found.
+</h1>
+</div>
+<a asp-page="/Employees/Index" class="btn btn-outline-info">
+    Click the link the view the list of employees
+</a>

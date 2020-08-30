@@ -1,0 +1,15 @@
+﻿@page "{id}"
+@model SimpleManagementSystem.Pages.Employees.DeleteModel
+@{
+}
+
+<div class="alert alert-danger alert-dismissible m-2">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h5>
+        Are you sure you want to Delete employee @Model.Employee.Name?
+    </h5>
+    <form method="post">
+        <button type="submit" class="btn btn-danger">Yes</button>
+        <a asp-page="/Employees/Index" class="btn btn-primary">No</a>
+    </form>
+</div>

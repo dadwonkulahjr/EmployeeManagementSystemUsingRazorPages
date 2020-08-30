@@ -13,13 +13,22 @@ namespace SimpleManagementSystem.Pages.Employees
     {
         private readonly IEmployeeRepository _employeeRepository;
         public Employee Employee { get; set; }
+
+        //[BindProperty(SupportsGet =true)]
+        [TempData]
+        public string Message { get; set; }
         public DetailsModel(IEmployeeRepository employeeRepository)
         {
             _employeeRepository = employeeRepository;
         }
-        public void OnGet(int id=1)
+        public IActionResult OnGet(int id)
         {
             Employee = _employeeRepository.GetEmployeeById(id);
+            if (Employee == null)
+            {
+                return RedirectToPage("/ErrorHandler/PageNotFound");
+            }
+            return Page();
         }
     }
 }

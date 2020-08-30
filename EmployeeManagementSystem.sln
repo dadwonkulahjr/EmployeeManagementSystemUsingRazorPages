@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleManagementSystem", "SimpleManagementSystem\SimpleManagementSystem.csproj", "{8923879D-2161-4DF5-8751-041A194A72B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.Models", "EmployeeManagement.Models\EmployeeManagement.Models.csproj", "{53A8289F-F2F7-489D-80F1-2B85540B8D0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement.Models", "EmployeeManagement.Models\EmployeeManagement.Models.csproj", "{53A8289F-F2F7-489D-80F1-2B85540B8D0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.Services", "EmployeeManagement.Services\EmployeeManagement.Services.csproj", "{3B297B17-DDAF-4B86-AD61-D0971E29BCA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement.Services", "EmployeeManagement.Services\EmployeeManagement.Services.csproj", "{3B297B17-DDAF-4B86-AD61-D0971E29BCA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
