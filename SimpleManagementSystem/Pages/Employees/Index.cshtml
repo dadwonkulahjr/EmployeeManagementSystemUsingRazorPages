@@ -2,6 +2,7 @@
 @model SimpleManagementSystem.Pages.Employees.IndexModel
 @{
     ViewData["Title"] = "List Of Employees";
+    ViewData["ShowButtons"] = true;
 
 }
 <style>
@@ -10,8 +11,16 @@
     }
 </style>
 
-<h1>Employee Information</h1>
-
+@*@await Component.InvokeAsync("HeadCount")*@
+<form method="get">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search..." asp-for="SearchTerm"/>
+        <div class="input-group-append">
+            <button class="btn btn-outline-info" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+<vc:head-count department-name="@null"></vc:head-count>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -25,25 +34,7 @@
     <tbody>
         @foreach (var employee in Model.Employees)
         {
-            <tr>
-                <td>
-                    @employee.Id
-                </td>
-                <td>
-                    @employee.Name
-                </td>
-                <td>
-                    @employee.Email
-                </td>
-                <td>
-                    @employee.Department
-                </td>
-                <td>
-                    <a class="btn btn-outline-secondary mt-2" asp-route-id="@employee.Id" asp-page="/Employees/Details">Details</a>
-                    <a asp-route-id="@employee.Id" class="btn btn-outline-primary mt-2" asp-page="/Employees/Edit">Edit</a>
-                    <a class="btn btn-danger mt-2 text-white" asp-route-id="@employee.Id" asp-page="/Employees/Delete">Delete</a>
-                </td>
-            </tr>
+            <partial name="_DisplayPartialView" model="employee" view-data="ViewData" />
         }
     </tbody>
 </table>

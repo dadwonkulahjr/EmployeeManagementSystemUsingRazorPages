@@ -12,6 +12,8 @@ namespace SimpleManagementSystem.Pages.Employees
     public class IndexModel : PageModel
     {
         private readonly IEmployeeRepository _employeeRepository;
+        [BindProperty(SupportsGet =true)]
+        public string SearchTerm { get; set; }
         public IEnumerable<Employee> Employees { get; set; }
         public IndexModel(IEmployeeRepository employeeRepository)
         {
@@ -19,7 +21,7 @@ namespace SimpleManagementSystem.Pages.Employees
         }
         public void OnGet()
         {
-            Employees = _employeeRepository.GetListOfEmployees();
+            Employees = _employeeRepository.SearchForEmployee(SearchTerm);
         }
     }
 }

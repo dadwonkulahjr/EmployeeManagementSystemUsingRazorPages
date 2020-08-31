@@ -38,6 +38,21 @@ namespace EmployeeManagement.Services
             return employee;
         }
 
+        public IEnumerable<DeptHeadCount> EmployeeCountByDepartment(Department? dept)
+        {
+            IEnumerable<Employee> query = _employeeList;
+            if(dept.HasValue)
+            {
+                query = query.Where(emp => emp.Department == dept.Value);
+            }
+            return query.GroupBy((emp) => emp.Department)
+                                         .Select((g) => new DeptHeadCount()
+                                         {
+                                             Department = g.Key.Value,
+                                             Count = g.Count()
+                                         }).ToList();
+        }
+
         public Employee GetEmployeeById(int id)
         {
             Employee employee = _employeeList.FirstOrDefault(emp => emp.Id == id);
@@ -47,6 +62,16 @@ namespace EmployeeManagement.Services
         public IEnumerable<Employee> GetListOfEmployees()
         {
             return _employeeList;
+        }
+
+        public IEnumerable<Employee> SearchForEmployee(string searchTerm)
+        {
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                return _employeeList;
+            }
+            return _employeeList.Where(emp => emp.Name.Contains(searchTerm)
+                    || emp.Email.Contains(searchTerm));
         }
 
         public Employee UpdateEmployee(Employee employeechanges)

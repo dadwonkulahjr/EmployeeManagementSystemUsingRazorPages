@@ -1,0 +1,26 @@
+﻿@model EmployeeManagement.Models.Employee
+@{ 
+    var showButton = (bool)ViewData["ShowButtons"];
+}
+<tr>
+    <td>
+        @Model.Id
+    </td>
+    <td>
+        @Model.Name
+    </td>
+    <td>
+        @Model.Email
+    </td>
+    <td>
+        @Model.Department
+    </td>
+    @if (showButton)
+    {
+    <td>
+        <a class="btn btn-outline-secondary mt-2" asp-route-id="@Model.Id" asp-page="/Employees/Details">Details</a>
+        <a asp-route-id="@Model.Id" class="btn btn-outline-primary mt-2" asp-page="/Employees/Edit">Edit</a>
+        <a class="btn btn-danger mt-2 text-white" asp-route-id="@Model.Id" asp-page="/Employees/Delete">Delete</a>
+    </td>
+    }
+</tr>

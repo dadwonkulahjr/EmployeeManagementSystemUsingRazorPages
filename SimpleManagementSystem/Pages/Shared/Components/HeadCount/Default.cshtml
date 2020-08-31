@@ -1,0 +1,26 @@
+﻿@model IEnumerable<EmployeeManagement.Models.DeptHeadCount>
+
+<h1>Employee Head Count Summary</h1>
+
+<table class="table table-hover text-center">
+    <thead class="thead-light">
+        <tr>
+            <th>Department</th>
+            <th>Head Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var deptHeadCount in Model)
+        {
+        <tr>
+            <td>
+                @deptHeadCount.Department
+            </td>
+            <td>
+                @deptHeadCount.Count.ToString()
+            </td>
+        </tr>
+        }
+
+    </tbody>
+</table>

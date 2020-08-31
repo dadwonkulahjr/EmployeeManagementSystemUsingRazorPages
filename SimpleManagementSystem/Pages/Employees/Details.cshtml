@@ -11,7 +11,12 @@
     }
 </style>
 
+
 <div class="row justify-content-center">
+    <div class="col-sm-12">
+       @* @await Component.InvokeAsync("HeadCount", new { department = Model.Employee.Department})*@
+       <vc:head-count department-name="@Model.Employee.Department"></vc:head-count>
+    </div>
     <div class="col-md-6">
         @if (!string.IsNullOrEmpty(Model.Message))
         {

@@ -1,9 +1,13 @@
 ﻿@page "{id}"
 @model SimpleManagementSystem.Pages.Employees.DeleteModel
 @{
+    ViewData["Title"] = "Delete Existing Employee";
+    ViewData["ShowButtons"] = false;
 }
 
+<h1>Delete Confirmation</h1>
 <div class="alert alert-danger alert-dismissible m-2">
+    <partial name="_DisplayPartialView" model="Model.Employee" view-data="ViewData" />
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <h5>
         Are you sure you want to Delete employee @Model.Employee.Name?
