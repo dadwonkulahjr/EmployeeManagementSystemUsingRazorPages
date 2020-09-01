@@ -33,7 +33,7 @@ namespace SimpleManagementSystem
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddSingleton<IEmployeeRepository, CustomEmployeeImplementation>();
+            services.AddScoped<IEmployeeRepository, SQLDataAccess>();
             services.Configure<RouteOptions>((options) =>
             {
                 options.AppendTrailingSlash = true;
